@@ -25,7 +25,8 @@ GifDetail.propTypes = {
   title: PropTypes.string,
   originalSrc: PropTypes.string.isRequired,
   userName: PropTypes.string,
-  uploadTime: PropTypes.string
+  uploadTime: PropTypes.string,
+  onClose: PropTypes.func.isRequired
 };
 
 export default GifDetail;
