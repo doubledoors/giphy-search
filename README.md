@@ -1,5 +1,5 @@
 # Giphy Search!
-A simple browsing app that untilises the [Giphy Api](https://developers.giphy.com/docs/).
+A simple browsing app that utilises the [GIPHY API](https://developers.giphy.com/docs/).
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ## Installation
