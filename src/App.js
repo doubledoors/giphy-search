@@ -49,7 +49,7 @@ class App extends Component {
   search() {
     // Destructure out what we need from state.
     const { offset, queryLimit, query, searchType, endpointType, apiUrl, apiKey } = this.state;
-    // Build the search query template literal.
+    // Define the search query template literal.
     let searchQuery = `${apiUrl}${searchType}/${endpointType}?q=${query}&api_key=${apiKey}&limit=${queryLimit}&offset=${offset}`;
 
     // Query the Endpoint with our search query.
