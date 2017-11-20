@@ -109,7 +109,7 @@ class App extends Component {
         </header>
         {selectedGif &&
           <GifDetail
-            title={selectedGif.title ? selectedGif.title : undefined}
+            title={selectedGif.title ? selectedGif.title : null}
             originalSrc={selectedGif.images.original.url}
             userName={selectedGif.username !== "" ? selectedGif.username : undefined}
             uploadTime={Moment(selectedGif.import_datetime).format("Do of MMMM, YYYY")}
