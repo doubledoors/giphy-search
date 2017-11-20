@@ -1,9 +1,8 @@
 # Giphy Search!
-## By Ben Sharp for zZish.
+A simple browsing app that untilises the [Giphy Api](https://developers.giphy.com/docs/).
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-###### Installation
-- cd into here (giphy-search)
+## Installation
 - npm install
 - npm start
 - should popup at localhost:3000
