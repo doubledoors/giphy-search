@@ -6,7 +6,7 @@ const GifDetail = ({ title, originalSrc, userName, uploadTime, onClose }) => {
     <div className="GifDetail fadeIn">
       <div className="GifDetail__panel">
         <i className="GifDetail__close fa fa-times fa-2x" onClick={() => onClose()} aria-hidden="true"></i>
-        <h1 className="GifDetail__title">{title}</h1>
+        <h2 className="GifDetail__title">{title}</h2>
         <img className="GifDetail__img" src={originalSrc} alt={title} />
         <p className="GifDetail__text GifDetail__text--username">By {userName}</p>
         <p className="GifDetail__text GifDetail__text--upload">Uploaded on: {uploadTime}</p>
@@ -16,7 +16,6 @@ const GifDetail = ({ title, originalSrc, userName, uploadTime, onClose }) => {
 };
 
 GifDetail.defaultProps = {
-  title: 'Title',
   userName: 'unknown user',
   uploadTime: 'unknown date'
 };
