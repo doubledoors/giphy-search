@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import Moment from 'moment';
-import GphApiClient from 'giphy-js-sdk-core';
 import Gif from './Gif';
 import GifDetail from './GifDetail';
 import Pagination from './Pagination';
@@ -14,17 +13,19 @@ class App extends Component {
     super();
     // Initial state.
     this.state = {
+      apiUrl: "http://api.giphy.com/v1/",
       apiKey: "SZzPRVnL4SBoNisS0aTGfgCGyRiTCIk5",
-      queryLimit: 10,
+      searchType: "gifs",
+      endpointType: "search",
       query: "",
+      queryLimit: 10,
       paginationToggle: false,
+      count: 0,
       totalGifs: null,
       offset: 0,
       gifs: [],
       selectedGif: null
     };
-    // Initialise Giphy SDK with APIKey.
-    this.apiClient = GphApiClient(this.state.apiKey);
     // Make updateSearch a debounced function so we aren't hammering the query endpoint.
     this.updateSearch = _.debounce(this.updateSearch, 350);
 
@@ -46,20 +47,26 @@ class App extends Component {
   }
 
   search() {
-    // Query the Giphy Search Endpoint with our search query, limit and our offset for pagination.
-    this.apiClient.search('gifs', { "q": this.state.query, "limit": this.state.queryLimit, "offset": this.state.offset })
-      .then((response) => {
+    // Destructure out what we need from state.
+    const { offset, queryLimit, query, searchType, endpointType, apiUrl, apiKey } = this.state;
+    // Build the search query template literal.
+    let searchQuery = `${apiUrl}${searchType}/${endpointType}?q=${query}&api_key=${apiKey}&limit=${queryLimit}&offset=${offset}`;
+
+    // Query the Endpoint with our search query.
+    fetch(searchQuery)
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({
         // Set state with the response.
-        this.setState({
-          count: response.pagination.count,
-          offset: response.pagination.offset,
-          totalGifs: response.pagination.total_count,
-          gifs: response.data
-        });
-      })
-      .catch((err) => {
-        console.error('whoooops GiphyApiClient error!');
-      })
+        count: data.pagination.count,
+        offset: data.pagination.offset,
+        totalGifs: data.pagination.total_count,
+        gifs: data.data
+      });
+    })
+    .catch((err) => {
+      console.error('whoooops GiphyApiClient error!', err);
+    })
   }
 
   onGifClick(id) {
@@ -103,8 +110,8 @@ class App extends Component {
         {selectedGif &&
           <GifDetail
             title={selectedGif.title ? selectedGif.title : undefined}
-            originalSrc={selectedGif.images.original.gif_url}
-            userName={selectedGif.user !== null ? selectedGif.user.username : undefined}
+            originalSrc={selectedGif.images.original.url}
+            userName={selectedGif.username !== "" ? selectedGif.username : undefined}
             uploadTime={Moment(selectedGif.import_datetime).format("Do of MMMM, YYYY")}
             onClose={this.onGifDetailClose}
           />
@@ -113,7 +120,7 @@ class App extends Component {
           {gifs.map(gif =>
             <li className="App__list-item" key={gif.id}>
               <Gif
-                src={gif.images.fixed_height.gif_url}
+                src={gif.images.fixed_height.url}
                 id={gif.id}
                 onGifClick={this.onGifClick}
               />
