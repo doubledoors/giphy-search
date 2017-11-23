@@ -6,15 +6,15 @@ import GifDetail from './GifDetail';
 import Pagination from './Pagination';
 import './App.css';
 import 'font-awesome/css/font-awesome.min.css';
+import keys from './keys.json';
 
 class App extends Component {
 
   constructor() {
     super();
-    // Initial state.
     this.state = {
       apiUrl: "http://api.giphy.com/v1/",
-      apiKey: "SZzPRVnL4SBoNisS0aTGfgCGyRiTCIk5",
+      apiKey: `${keys.giphy}`,
       searchType: "gifs",
       endpointType: "search",
       query: "",
