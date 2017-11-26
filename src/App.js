@@ -87,6 +87,7 @@ class App extends Component {
       count = count * -1;
     }
 
+    // Update our offset value.
     updateOffset = offset <= 0 && navigatingBack ? offset : offset + count;
 
     // Update our offset value in state and call search on callback.
