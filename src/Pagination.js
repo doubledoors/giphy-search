@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Pagination = ({ page, pageCount, onPageClick }) => {
+  // Show total page count as 1 instead of 0 when we only have 1 page returned in our results.
+  pageCount = pageCount === 0 ? 1 : pageCount;
+
   return (
     <div className="Pagination">
       <div className="Pagination__button Pagination__button--prev" onClick={() => onPageClick()}>

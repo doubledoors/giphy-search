@@ -80,15 +80,18 @@ class App extends Component {
     const { offset, queryLimit } = this.state;
     const navigatingBack = next === undefined;
     let count = queryLimit;
+    let updateOffset;
 
     // If next is undefined (we're navigating back), make count a negative value.
     if (navigatingBack) {
       count = count * -1;
     }
 
+    updateOffset = offset <= 0 && navigatingBack ? offset : offset + count;
+
     // Update our offset value in state and call search on callback.
     this.setState({
-      offset: offset <= 0 && navigatingBack ? offset : offset + count
+      offset: updateOffset
     }, () => this.search());
   }
 
