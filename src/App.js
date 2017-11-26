@@ -77,17 +77,18 @@ class App extends Component {
   }
 
   onPageClick(next) {
-    // Define count equal to our query limit.
-    let count = this.state.queryLimit;
+    const { offset, queryLimit } = this.state;
+    const navigatingBack = next === undefined;
+    let count = queryLimit;
 
-    // If next is undefined (we're going back), make count a negative value.
-    if (next === undefined) {
+    // If next is undefined (we're navigating back), make count a negative value.
+    if (navigatingBack) {
       count = count * -1;
     }
 
     // Update our offset value in state and call search on callback.
     this.setState({
-      offset: this.state.offset + count
+      offset: offset <= 0 && navigatingBack ? offset : offset + count
     }, () => this.search());
   }
 
