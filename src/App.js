@@ -90,7 +90,7 @@ class App extends Component {
     // Update our offset value.
     updateOffset = ( 
       offset <= 0 && navigatingBack
-      || offset / queryLimit + 1 === Math.round(totalGifs / queryLimit) && next
+      || offset / queryLimit + 1 === Math.round(totalGifs / queryLimit) && !navigatingBack
     )  
       ? offset : offset + count;
 
