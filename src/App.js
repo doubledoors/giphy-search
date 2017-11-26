@@ -77,7 +77,7 @@ class App extends Component {
   }
 
   onPageClick(next) {
-    const { offset, queryLimit } = this.state;
+    const { offset, queryLimit, totalGifs } = this.state;
     const navigatingBack = next === undefined;
     let count = queryLimit;
     let updateOffset;
@@ -88,7 +88,11 @@ class App extends Component {
     }
 
     // Update our offset value.
-    updateOffset = offset <= 0 && navigatingBack ? offset : offset + count;
+    updateOffset = ( 
+      offset <= 0 && navigatingBack
+      || offset / queryLimit + 1 === Math.round(totalGifs / queryLimit) && next
+    )  
+      ? offset : offset + count;
 
     // Update our offset value in state and call search on callback.
     this.setState({
@@ -134,8 +138,8 @@ class App extends Component {
         </ul>
         {paginationToggle &&
           <Pagination
-            page={offset / queryLimit + 1}
-            pageCount={Math.round(totalGifs / queryLimit)}
+            currentPage={offset / queryLimit + 1}
+            totalPages={Math.round(totalGifs / queryLimit)}
             onPageClick={this.onPageClick}
           />
         }
