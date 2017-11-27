@@ -28,6 +28,23 @@
   box-sizing: border-box;
 }
 
+.App__input-group {
+  position: relative;
+}
+
+#App__input-clear {
+  position: relative;
+  left: -30px;
+  color: #00acc1;
+  font-size: 1.4em;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.App__input-clear--hidden {
+  visibility: hidden;
+}
+
 .App__list, .App__list-item {
   list-style: none;
   margin: 10px 0;
@@ -51,6 +68,15 @@
   .App__list-item, .App__input {
     width: 100%;
     margin: 0;
+  }
+
+  #App__input-clear {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    top: 100%;
+    margin-left: -1.4em;
+    margin-top: -1.4em;
   }
 }
 

@@ -6,6 +6,7 @@ import GifDetail from './GifDetail';
 import Pagination from './Pagination';
 import './App.css';
 import 'font-awesome/css/font-awesome.min.css';
+import classnames from 'classnames';
 import keys from './keys.json';
 
 class App extends Component {
@@ -28,11 +29,11 @@ class App extends Component {
     };
     // Make updateSearch a debounced function so we aren't hammering the query endpoint.
     this.updateSearch = _.debounce(this.updateSearch, 350);
-
     // Context binding.
     this.onGifClick = this.onGifClick.bind(this);
     this.onGifDetailClose = this.onGifDetailClose.bind(this);
     this.onPageClick = this.onPageClick.bind(this);
+    this.onInputClear = this.onInputClear.bind(this);
   }
 
   updateSearch() {
@@ -107,14 +108,28 @@ class App extends Component {
     });
   }
 
+  onInputClear() {
+    let query = this.refs.query.value = "";
+    
+    this.setState({
+      query: query
+    });
+  }
+
   render() {
     const { paginationToggle, selectedGif, gifs, totalGifs, offset, queryLimit } = this.state;
+    let inputClasses = classnames('fa', 'fa-times-circle', {
+      'App__input-clear--hidden': this.state.query === ""
+    });
 
     return (
       <div className="App">
         <header className="App__header">
           <h1 className="App__title">Giphy Search</h1>
-          <input className="App__input" ref="query" onChange={(e) => this.updateSearch()} type="text" placeholder="Search... ALL THE GIFS!" />
+          <div className="App__input-group">
+            <input className="App__input" ref="query" onChange={(e) => this.updateSearch()} type="text" placeholder="Search as you type..." />
+            <i id="App__input-clear" className={inputClasses} aria-hidden="true" onClick={(e) => this.onInputClear()}></i>
+          </div>
         </header>
         {selectedGif &&
           <GifDetail
