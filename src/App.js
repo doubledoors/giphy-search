@@ -109,11 +109,8 @@ class App extends Component {
   }
 
   onInputClear() {
-    let query = this.refs.query.value = "";
-    
-    this.setState({
-      query: query
-    });
+    this.refs.query.value = "";
+    this.updateSearch();
   }
 
   render() {
