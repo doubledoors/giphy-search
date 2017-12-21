@@ -47,7 +47,7 @@ class App extends Component {
     });
   }
 
-  search() {
+  search(resetOffset = true) {
     // Destructure out what we need from state.
     const { offset, queryLimit, query, searchType, endpointType, apiUrl, apiKey } = this.state;
     // Define the search query template literal.
@@ -60,9 +60,9 @@ class App extends Component {
       this.setState({
         // Set state with the response.
         count: data.pagination.count,
-        offset: data.pagination.offset,
+        offset: resetOffset ? 0: data.pagination.offset,
         totalGifs: data.pagination.total_count,
-        gifs: data.data
+        gifs: data.data,
       });
     })
     .catch((err) => {
@@ -88,16 +88,17 @@ class App extends Component {
       count = count * -1;
     }
 
-    // Update our offset value.
+    // Update our local offset value.
     updateOffset =
       (offset <= 0 && navigatingBack)
       || (offset / queryLimit + 1 === Math.round(totalGifs / queryLimit) && !navigatingBack)
       ? offset : offset + count;
 
-    // Update our offset value in state and call search on callback.
+    // Update our offset value in state and call search on callback
+    // assigning false to resetOffset param so we can query for paginated data.
     this.setState({
       offset: updateOffset
-    }, () => this.search());
+    }, () => this.search(false));
   }
 
   onGifDetailClose() {
