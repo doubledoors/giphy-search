@@ -97,7 +97,7 @@
 
 /* GifDetail component styles*/
 .GifDetail {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -120,8 +120,12 @@
   border: 1px solid #000;
 }
 
+.GifDetail img {
+  margin: 1.5em 0;
+}
+
 .GifDetail__title {
-  margin-top: 0;
+  margin: 0;
 }
 
 .GifDetail__title,
@@ -131,6 +135,10 @@
 
 .GifDetail__text:last-child {
   margin-bottom: 0;
+}
+
+.GifDetail p {
+  margin: 5px 0;
 }
 
 .GifDetail__text--username {
