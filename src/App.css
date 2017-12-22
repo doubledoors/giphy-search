@@ -85,13 +85,38 @@
 
 /* Gif component styles*/
 .Gif {
+  position: relative;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  -webkit-animation-duration: 0.3s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   opacity: 0;
+  z-index: 1;
+}
+
+.GifWrapper{
+  position: relative;
+}
+
+.GifPlaceholder {
+  position: absolute;
+  top: 0;
+  height: 200px;
+  z-index: 0;
+  padding-top: 80px;
+  box-sizing: border-box;
+  border: 1px solid lightgrey;
+}
+
+.GifPlaceholder--hidden {
+  display: none;
+}
+
+.GifPlaceholder .loadingIcon {
+  font-size: 2em;
+  color: #00acc1;
 }
 
 @media(max-width: 468px) {
@@ -113,6 +138,7 @@
   animation-duration: 0.2s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+  z-index: 9999;
 }
 
 .GifDetail__panel {
