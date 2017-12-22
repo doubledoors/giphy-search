@@ -87,6 +87,11 @@
 .Gif {
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  opacity: 0;
 }
 
 @media(max-width: 468px) {
@@ -213,4 +218,19 @@
 @keyframes fadeIn {
   0% {opacity: 0;}
   100% {opacity: 1;}
+}
+
+.spin {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
 }
