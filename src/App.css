@@ -96,22 +96,13 @@
   z-index: 1;
 }
 
-.GifWrapper{
-  position: relative;
-}
-
 .GifPlaceholder {
-  position: absolute;
-  top: 0;
+  position: relative;
   height: 200px;
   z-index: 0;
   padding-top: 80px;
   box-sizing: border-box;
-  border: 1px solid lightgrey;
-}
-
-.GifPlaceholder--hidden {
-  display: none;
+  border: 1px dashed #00acc1;
 }
 
 .GifPlaceholder .loadingIcon {
@@ -259,4 +250,10 @@
 @keyframes spin {
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
+}
+
+/* Helpers */
+.hidden {
+  position:absolute;
+  clip:rect(0 0 0 0);
 }

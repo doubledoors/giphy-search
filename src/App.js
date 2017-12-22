@@ -144,6 +144,7 @@ class App extends Component {
                 src={gif.images.fixed_height.url}
                 id={gif.id}
                 onGifClick={this.onGifClick}
+                width={gif.images.fixed_height.width}
               />
             </li>
           )}

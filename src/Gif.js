@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 class Gif extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = { imageStatus: 'loading' };
   }
 
@@ -18,14 +18,19 @@ class Gif extends Component {
 
   render() {
 
-    let classes = classnames('Gif', {
-      'fadeIn': this.state.imageStatus === "loaded"
+    let gifStyle = {
+      width: this.props.width + 'px'
+    }
+
+    let imgClasses = classnames('Gif', {
+      'fadeIn': this.state.imageStatus === "loaded",
+      'hidden': this.state.imageStatus !== 'loaded'
     });
 
     return (
-      <div>
+      <div className="GifWrapper">
         <img
-          className={classes}
+          className={imgClasses}
           src={this.props.src}
           onLoad={this.onImageLoaded.bind(this)}
           onError={this.onImageError.bind(this)}
@@ -33,7 +38,9 @@ class Gif extends Component {
           alt=""
         />
         {this.state.imageStatus === 'loading' &&
-          <i class="fa fa-spinner spin" aria-hidden="true"></i>
+          <div className="GifPlaceholder" style={gifStyle}>
+            <i className="fa fa-spinner spin loadingIcon" aria-hidden="true"></i>
+          </div>
         }
       </div>
     );
@@ -43,7 +50,8 @@ class Gif extends Component {
 Gif.propTypes = {
   src: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  onGifClick: PropTypes.func.isRequired
+  onGifClick: PropTypes.func.isRequired,
+  width: PropTypes.string.isRequired
 };
 
 export default Gif;
