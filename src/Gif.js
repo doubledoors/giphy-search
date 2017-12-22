@@ -18,8 +18,19 @@ class Gif extends Component {
 
   render() {
 
+    const borderColors = [
+      '#9400D3',
+      '#4B0082',
+      '#0000FF',
+      '#00FF00',
+      '#FFFF00',
+      '#FF7F00',
+      '#FF0000'
+    ]
+
     let gifStyle = {
-      width: this.props.width + 'px'
+      width: this.props.width + 'px',
+      borderColor: borderColors[Math.floor(Math.random() * borderColors.length)]
     }
 
     let imgClasses = classnames('Gif', {
