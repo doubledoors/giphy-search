@@ -33,7 +33,7 @@ class Gif extends Component {
       borderColor: borderColors[Math.floor(Math.random() * borderColors.length)]
     }
 
-    let imgClasses = classnames('Gif', {
+    let gifClasses = classnames('Gif', {
       'fadeIn': this.state.imageStatus === "loaded",
       'hidden': this.state.imageStatus !== 'loaded'
     });
@@ -41,7 +41,7 @@ class Gif extends Component {
     return (
       <div className="GifWrapper">
         <img
-          className={imgClasses}
+          className={gifClasses}
           src={this.props.src}
           onLoad={this.onImageLoaded.bind(this)}
           onError={this.onImageError.bind(this)}
