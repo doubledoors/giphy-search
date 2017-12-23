@@ -5,7 +5,18 @@ import classnames from 'classnames';
 class Gif extends Component {
   constructor() {
     super();
-    this.state = { imageStatus: 'loading' };
+    this.state = { 
+      imageStatus: 'loading',
+      placeHolderColors: [
+        '#9400D3',
+        '#4B0082',
+        '#0000FF',
+        '#00FF00',
+        '#FFFF00',
+        '#FF7F00',
+        '#FF0000'
+      ]
+    };
 
     this.onImageLoaded = this.onImageLoaded.bind(this);
     this.onImageError = this.onImageError.bind(this);
@@ -17,31 +28,21 @@ class Gif extends Component {
   }
 
   onImageError() {
-    this.setState({ imageStatus: 'failed to load' });
+    this.setState({ imageStatus: 'gif failed to load :(' });
   }
 
   getRandomColor(){
-
-    const colors = [
-      '#9400D3',
-      '#4B0082',
-      '#0000FF',
-      '#00FF00',
-      '#FFFF00',
-      '#FF7F00',
-      '#FF0000'
-    ]
-
-    return colors[Math.floor(Math.random() * colors.length)];
+    const { placeHolderColors } = this.state;
+    return placeHolderColors[Math.floor(Math.random() * placeHolderColors.length)];
   }
 
   render() {
 
-    const {src, id, onGifClick} = this.props;
+    const { src, id, onGifClick, width } = this.props;
     let randomColor = this.getRandomColor();
 
     let gifStyle = {
-      width: this.props.width + 'px',
+      width: width + 'px',
       borderColor: randomColor
     }
 
@@ -66,7 +67,7 @@ class Gif extends Component {
         />
         {this.state.imageStatus === 'loading' &&
           <div className="GifPlaceholder" style={gifStyle}>
-          <i className="fa fa-spinner spin loadingIcon" aria-hidden="true" style={loadingIconStyle}></i>
+            <i className="fa fa-spinner spin loadingIcon" aria-hidden="true" style={loadingIconStyle}></i>
           </div>
         }
       </div>
